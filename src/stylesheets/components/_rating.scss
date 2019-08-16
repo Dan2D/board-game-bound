@@ -1,0 +1,17 @@
+.rating {
+    background: $secondary-color;
+    position: relative;
+    width: 50px;
+    text-align: center;
+    margin-right: 10px;
+    &::after {
+        content: "";
+        width: 100%;
+        position: absolute;
+        bottom: -14px;
+        right: 0;
+        border-top: 15px solid $secondary-color;
+        border-left:25px solid transparent;
+        border-right: 25px solid transparent;
+    }
+}

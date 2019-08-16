@@ -1,0 +1,80 @@
+.carousel-conatiner {
+    width: 100vw;
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel__tag {
+    position: absolute;
+    top:0;
+    left: 15px;
+    margin:0;
+    padding: 5px;
+    color: white;
+    border-radius: 0 0 5px 5px;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.carousel__slide--visible>div,
+.carousel__slide--hidden>div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.carousel__slide--visible>div {
+    z-index: 5;
+}
+
+.carousel__image {
+    width:125vw;
+    height: 100vw;
+}
+
+.carousel__btn {
+    position:absolute;
+    top: 45%;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.carousel__btn img {
+    height: 40px;
+}
+
+
+.carousel__btn-L {
+    left: 0;
+}
+
+.carousel__btn-R{
+    right: 0;
+}
+
+.carousel__dot {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.carousel__dot button {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    border: none;
+    margin:5px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.5;
+}
+
+button.carousel__dot--selected {
+    opacity: 1;
+} 

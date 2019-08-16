@@ -1,0 +1,37 @@
+.carousel-conatiner {
+    width: 100vw;
+}
+
+.carousel {
+    position: relative;
+    &__tag {
+        position: absolute;
+        top:0;
+        left: 15px;
+        margin:0;
+        padding: 5px;
+        border-radius: 0 0 5px 5px;
+        background: rgba(0,0,0,0.4);
+        z-index: 1;
+    }
+    &__image {
+        width:125vw;
+        height: 100vw;
+    }
+    &__lnk {
+        display:inline-block;
+    }
+}
+
+.slide {
+    opacity: 0.6;
+    transition: opacity 500ms ease;
+    &:hover {
+        opacity: 1;
+        transition: opacity 500ms ease;
+    }
+}
+
+.control-dots {
+    bottom: 25px;
+}
