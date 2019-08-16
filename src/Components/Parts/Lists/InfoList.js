@@ -15,11 +15,13 @@ function InfoList(props) {
                  <Rating rating={props.rating}/>
             </div>
             <div className="info-block--bottom">
+                <div className="info-block__game-icons">
                 <Icon path="./Images/player-icon.png" name="players" min={props.minPlayers} max={props.maxPlayers} />
                 <Icon path="./Images/time-icon.png" name="time" min={props.minTime} max={props.maxTime} />
+                </div>
                 <div>
-                {props.discount > 0 ? <p className="info-block__price"><strong>Price </strong>{price}</p> : null}
-                <p className={"info-block__msrp" + (props.msrp !== props.price ? "--strike" : null)}><strong>MSRP </strong>{`$${props.msrp}`}</p>
+                {props.discount > 0 ? <p className="info-block__price">{price}</p> : null}
+                <p className={"info-block__msrp" + (props.msrp !== props.price ? "--strike" : null)}>MSRP {`$${props.msrp}`}</p>
                 </div>
                 
             </div>

@@ -9,7 +9,7 @@ function Header(props) {
         <div className="header-container">
             <Title/>
             <Searchbar/>
-            <Link to="/"><img src={require("./Images/home-icon.png")} alt="home icon"/></Link>
+            <Link className="home-lnk" to="/"><img src={require("./Images/home-icon.png")} alt="home icon"/></Link>
         </div>
     )
 }

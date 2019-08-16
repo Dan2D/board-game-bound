@@ -23,7 +23,13 @@ $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
 $text-color: white !default;
 
 ///@type Color
+$mainBg: #25434b !default;
+
+///@type Color
 $darkBg: rgba(black, 0.5) !default;
+
+///@type Color
+$lightBg: rgb(105, 174, 206) !default;
 
 ///@type Color
 $secondary-color: #007C6D !default;
@@ -52,10 +58,25 @@ $dark-grey: rgb(68, 68, 68) !default;
 /// @type Length
 $max-width: 1180px !default;
 
+//Screen Sizes
 ///@type Length
-$mobile-game-size: 115px;
+$screen-sm-min: 481px !default;
 
+///@type Length
+$screen-md-min: 768px !default;
 
+///@type Length
+$screen-lg-min: 992px !default;
+
+///@type Length
+$screen-xl-min: 1200px !default;
+
+// Component Sizes
+///@type Length
+$mobile-game-size: 115px !default;
+
+///@type Length
+$searchbarHt: 35px !default;
 
 
 

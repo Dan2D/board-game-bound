@@ -10,12 +10,16 @@ if (props.games.loading){
     return <div>LOADING...</div>
 }
     const gameList = props.games.list.map((game, indx) => {
+        if (props.list === "summary" && indx > 4){
+            return null;
+        }
         let rating = game.average_user_rating;
         if (!game.average_user_rating){
             rating = 0;
         }
         return (
         <li key={game.name} className="list-item">
+            <Link className="list-item__lnk" to={`/game/${game.name}`}>
             <GameList 
             type={props.type}
             src={game.images.small}
@@ -39,6 +43,7 @@ if (props.games.loading){
             discount={game.discount}
             rating={rating}
             />
+            </Link>
         </li>)
     });
 

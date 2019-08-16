@@ -1,9 +1,9 @@
 import React from 'react'
 
 function Rating(props) {
-    let rating = props.rating === 0.00 ? "?" : props.rating.toFixed(2);
+    let rating = !props.rating ? "?" : props.rating.toFixed(2);
     return (
-        <div className={`rating rating--${props.class}`}>
+        <div className={`rating ${rating === "?" ? "rating--none" : ""}`}>
             <strong>{rating}</strong>
         </div>
     )

@@ -1,4 +1,4 @@
-import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES} from "../Actions/types";
+import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME} from "../Actions/types";
 
 const gamesReducer = (state = {}, action) =>{
     switch(action.type){
@@ -13,7 +13,12 @@ const gamesReducer = (state = {}, action) =>{
         case GET_SUMMARY_GAMES:
             let gameType;
             if (action.criteria === "popularity"){
-                gameType = "trendingGames";
+                gameType = "topGames";
+                let sort = action.payload.sort((a,b) => a.average_user_rating < b.average_user_rating);
+                action.payload = sort;
+            }
+            else if (action.criteria === "top"){
+                gameType = "trendingGames"
             }
             else {gameType = "dealGames"}
             return {
@@ -21,6 +26,16 @@ const gamesReducer = (state = {}, action) =>{
                 [gameType]: {
                 list: action.payload,
                 loading: false
+                }
+            }
+        case SET_DETAIL_GAME:
+            console.log("detail")
+            return {
+                ...state,
+                detailGame: {
+                    game: action.payload,
+                    bg: action.bg,
+                    loading: false
                 }
             }
         case GAMES_LOADING:

@@ -1,3 +1,49 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
+.header-container {
+    position: relative;
+}
+
+.title-container {
+    @include flex(row);
+}
+
+.searchbar {
+    &-container {
+        @include flex(row, center, center);
+        margin-bottom: 10px;
+    }
+    &__icon {
+       margin-bottom: 3px;
+        height: $searchbarHt - 5px;
+    }
+    &__input {
+        border-radius: 5px 0 0 5px;
+        border: none;
+        padding: 3px;
+        height: $searchbarHt;
+    }
+    &__lnk {
+        background: #3da2be78;
+        padding: 2px 10px;
+        border-radius: 0 5px 5px 0;
+        height: $searchbarHt;
+        transition: all 500ms ease;
+        &:hover {
+            text-decoration: none;
+            background: #58b1cacb;
+            transition: all 500ms ease;
+        }
+    }
+    
+}
+
+.home-lnk {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    & img {
+        height: 30px;
+    }
+}

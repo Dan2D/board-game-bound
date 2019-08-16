@@ -8,12 +8,20 @@ export const initialState = {
             list: {},
             loading: true
         },
+        topGames: {
+            list: {},
+            loading: true
+        },
         dealGames: {
             list: {},
             loading: true
         },
         searchGames: {
             list: {},
+            loading: true
+        },
+        detailGame: {
+            game: {},
             loading: true
         }
     }

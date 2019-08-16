@@ -16,14 +16,14 @@ function Home(props) {
     const {getSummaryGames} = props;
     useEffect(() => {
         getSummaryGames("popularity");
-        getSummaryGames("discount");
+        getSummaryGames("top");
     }, [getSummaryGames])
 
     return (
         <div className="hero-container">
             <Hero />
-            <List title="TRENDING GAMES" type="trendingGames"/>
-            <List title="DEALS" type="dealGames" />
+            <List title="TRENDING GAMES" type="trendingGames" list="summary"/>
+            <List title="TOP GAMES" type="topGames" list="summary"/>
         </div>
     )
 }

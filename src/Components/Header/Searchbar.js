@@ -4,7 +4,9 @@ import {Link} from "react-router-dom";
 function Searchbar(props) {
     return (
         <div className="searchbar-container">
-            <img src={require("./Images/search-icon.png")} alt="search icon"/>
+            <Link to={`/list/search/`}>
+                <img className="searchbar__icon" src={require("./Images/search-icon.png")} alt="search icon"/>
+            </Link>
             <input className="searchbar__input" type="text" placeholder="Search..."/>
             <Link className="searchbar__lnk" to={`/search/INSERT PROPS LATER`}>
                 Search

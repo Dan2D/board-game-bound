@@ -54,3 +54,31 @@
   margin: auto;
 }
 
+///Media Queries
+//small devices
+@mixin sm {
+  @media (min-width: $screen-sm-min){
+    @content;
+  }
+}
+
+//med devices
+@mixin md {
+  @media (min-width: $screen-md-min){
+    @content;
+  }
+}
+
+//large devices
+@mixin lg {
+  @media (min-width: $screen-lg-min){
+    @content;
+  }
+}
+
+//extra-larg devices
+@mixin xl {
+  @media (min-width: $screen-xl-min){
+    @content;
+  }
+}

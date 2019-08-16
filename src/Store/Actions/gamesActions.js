@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES} from "./types";
+import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME} from "./types";
 import {API_CALLS} from "../../Utils/API_CALLS";
 
 const {CLIENT_ID} = API_CALLS["BGA"];
@@ -7,10 +7,13 @@ const {CLIENT_ID} = API_CALLS["BGA"];
 export const getSummaryGames = (criteria = "popularity") => dispatch => {
     let url;
     if (criteria === "popularity"){
-        url = `https://www.boardgameatlas.com/api/search?order_by=${criteria}&limit=5&client_id=7pxbmyR661`;
+        url = `https://www.boardgameatlas.com/api/search?order_by=popularity&limit=50&client_id=7pxbmyR661`;
     }
     if (criteria === "discount") {
-        url =  `https://www.boardgameatlas.com/api/search?order_by=${criteria}&lt_discount=0.5&limit=5&client_id=7pxbmyR661`;
+        url =  `https://www.boardgameatlas.com/api/search?order_by=discount&lt_discount=0.5&limit=5&client_id=7pxbmyR661`;
+    }
+    if (criteria === "top"){
+        url = `https://www.boardgameatlas.com/api/search?order_by=reddit_week_count&limit=5&client_id=7pxbmyR661`
     }
     return axios.get(url)
     .then(data => {
@@ -46,8 +49,28 @@ export const getNewGames = dispatch => {
     });
 };
 
+
+export const getGameDetail = name => dispatch => {
+    axios.get(`https://www.boardgameatlas.com/api/search?name=${name}&limit=1&client_id=7pxbmyR661`)
+    .then (response => {
+        let id = response.data.games[0].id;
+        getDetailBG(response.data.games, id, dispatch);
+    });
+};
+
+export const getDetailBG = (game, id, dispatch) => {
+    axios.get(`https://www.boardgameatlas.com/api/game/images?game_id=${id}&include_game=true&limit=1&client_id=7pxbmyR661`)
+    .then(response => {
+        dispatch({
+            type: SET_DETAIL_GAME,
+            payload: game,
+            bg: response.data.images[0].large
+        });
+    });
+}
+
 export const setGameLoading = (name, bool) => {
-    let gameType = name === "new" ? "newGames" : name === "search" ? "searchGames" : "trendingGames";
+    let gameType = name === "new" ? "newGames" : name === "search" ? "searchGames" : name === "detail" ? "detailGame" : "trendingGames";
     return {type: GAMES_LOADING,
             name: gameType, 
             payload: bool}
