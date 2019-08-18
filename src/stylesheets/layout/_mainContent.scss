@@ -1,3 +1,6 @@
+p, a {
+    font-size: 15px;
+}
 .list-summary{
     &-container {
         @include flex(column, flex-start, center);
@@ -19,3 +22,9 @@
     
 }
 
+
+.detail-game-block {
+    &--layout {
+        margin: 10px;
+    }
+}

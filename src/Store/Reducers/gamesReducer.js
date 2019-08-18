@@ -1,4 +1,4 @@
-import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME} from "../Actions/types";
+import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG} from "../Actions/types";
 
 const gamesReducer = (state = {}, action) =>{
     switch(action.type){
@@ -29,13 +29,21 @@ const gamesReducer = (state = {}, action) =>{
                 }
             }
         case SET_DETAIL_GAME:
-            console.log("detail")
             return {
                 ...state,
                 detailGame: {
+                    ...state.detailGame,
                     game: action.payload,
                     bg: action.bg,
                     loading: false
+                }
+            }
+        case SET_DETAIL_IMG:
+            return {
+                ...state,
+                detailGame: {
+                    ...state.detailGame,
+                    image: action.payload
                 }
             }
         case GAMES_LOADING:

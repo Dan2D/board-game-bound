@@ -1,21 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Icon from "../Parts/Icon";
+import Price from "../Parts/Price";
+import Description from "./Description";
+import MakerBlock from "./MakerBlock";
 
 
 function GameBlock(props) {
     return (
-        <div style={{backgroundImage: 'url("'+props.detailGame.bg+'")'}}>
-            <h3>{props.detailGame.game[0].name}</h3>
-            <p>{props.detailGame.game[0].year_published}</p>
-            <div></div>
+        <div className="detail-game-block">
+            <img className="detail-game-block__bg" style={{backgroundImage: `url("${props.bg}")`}} src={require("./Images/bg-overlay.png")} alt="board game cover" />
+            <div className="detail-game-block--layout">
+                <div className="detail-game-block__title-container">
+                    <h3 className="detail-game-block__title">{props.game.name.toUpperCase()}</h3>
+                    <p className="detail-game-block__year">{props.game.year_published}</p>
+                </div>
+                <div>
+                    <img className="detail-game-block__cover" src={props.image} alt={props.game.name} />
+                    <div className="detail-game-block__icon-set">
+                        <Icon type="detail" path="./Images/player-icon.png" name="players" min={props.game.min_players} max={props.game.max_players} />
+                        <Icon type="detail" path="./Images/time-icon.png" name="time" min={props.game.min_playtime} max={props.game.max_playtime} />
+                        <Icon type="detail" path="./Images/age-icon.png" name="age" min={props.game.min_age}/>
+                    </div>
+                </div>
+                <Price class="detail-game-block" price={props.game.price} msrp={props.game.msrp} discount={props.game.discount}/>
+                <Description dscrpt={props.game.description} url={props.game.url}/>
+                <MakerBlock designers={props.game.designers} artists={props.game.artists} publisher={props.game.primary_publisher}/>
+            </div>
         </div>
     )
 }
 
 const mapStateToProps = state => {
-    console.log(state.games.detailGame.game[0])
     return {
-        detailGame: state.games.detailGame
+        bg: state.games.detailGame.bg,
+        image: state.games.detailGame.image,
+        game: state.games.detailGame.game
     }
 }
 

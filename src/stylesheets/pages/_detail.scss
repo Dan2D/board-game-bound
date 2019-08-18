@@ -1,0 +1,72 @@
+.detail-game-block {
+    position: relative;
+    &__bg {
+        position:absolute;
+        background: rgb(19, 19, 19);
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 200%;
+    }
+    &__title-container {
+        position: relative;
+        display: inline-block;
+        margin-bottom: $titleFontSize;
+    }
+    &__title {
+        font-size: $titleFontSize;
+        font-weight: 700;
+    }
+    &__year {
+        position: absolute;
+        right: 0;
+        font-size: $yearFontSize;
+    }
+    &__cover {
+        width:$detailCoverWidth;
+    }
+    &__icon-set {
+        @include flex(row, space-between);
+        width:$detailCoverWidth;
+        margin-bottom: 10px;
+        & .icon-set {
+            @include flex(column, center, center);
+            margin: 2px 5px;
+            & img {
+                width: 30px;
+                height: 30px;
+            }
+            & span {
+                margin-left: -5px;
+            }
+            &__title {
+                color: rgb(61, 158, 223);
+                font-weight: 700;
+            }
+        }
+    }
+    &__msrp--strike {
+        @extend .info-block__msrp--strike;
+    }
+    &__dscrpt-title {
+        font-size: $secondaryTitleFontSize;
+    }
+    &__site-url {
+        width: 85%;
+        overflow:hidden;
+        text-overflow: ellipsis;
+        margin: 10px 0;
+        & a {
+            font-style: italic;
+            white-space: nowrap;
+        }
+    }
+    &__maker-title {
+        font-size: $titleFontSize;
+    }
+}
+
+.description-container {
+    margin:5px 0;
+}

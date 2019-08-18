@@ -8,7 +8,7 @@ function Carousel(props) {
     let slideArr = props.games.map((game, indx) => {
         return (
             <div key={game.name}>
-                <Link className="carousel__lnk" to={`/game/${game.name.replace(" ", "%20")}`}>
+                <Link className="carousel__lnk" to={`/game/${game.name.replace(" ", "%20")}/${game.id}`}>
                     <img className="carousel__image"src={game.image} alt={game.name}/>
                 </Link>
             </div>

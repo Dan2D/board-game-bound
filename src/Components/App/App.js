@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Home from "../Home/Home";
 import GameDetail from "../GameDetail/GameDetail";
 
-
+// Think about gameName vs GameID for games in New Games vs Trending/Top, (BGG id's don't match Board Game Atlas)
 function App() {
   return (
     <Router>
