@@ -11,6 +11,10 @@ function Description(props) {
                 <a href={props.url} target="_blank" rel="noopener noreferrer">
                     {props.url}
                 </a>
+                <p><strong>Rules:</strong></p>
+                <a href={props.rules} target="_blank" rel="noopener noreferrer">
+                    {props.rules}
+                </a>
             </div>
         </div>
     )

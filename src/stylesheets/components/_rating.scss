@@ -14,6 +14,22 @@
         border-left:25px solid transparent;
         border-right: 25px solid transparent;
     }
+    &--detail {
+        position: absolute;
+        right: 0px;
+        top: 0;
+        width: 75px;
+        &::after {
+            bottom: -20px;
+            border-top: 20px solid $secondary-color;
+            border-left:40px solid transparent;
+            border-right: 35px solid transparent;
+        }
+    }
+    &__reviews {
+        font-size: 10px;
+        font-style: italic;
+    }
     &--none {
         opacity: 0.7;
     }

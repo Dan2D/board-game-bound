@@ -21,14 +21,13 @@ if (props.games.loading){
         <li key={game.name} className="list-item">
             <Link className="list-item__lnk" to={`/game/${game.name}/0`}>
             <GameList 
-            type={props.type}
+            gameType={props.gameType}
             src={game.images.small}
             discount={game.discount}
             name={game.name}
             rank={indx}
             />
             <InfoList 
-            type={props.type}
             name={game.name}
             id={game.id}
             year={game.year_published}
@@ -48,19 +47,19 @@ if (props.games.loading){
     });
 
     return (
-        <div className="list-summary-container">
-            <h3 className="list-summary__title">{props.title}</h3>
-            <ul className="list-summary__list">
+        <div className={`list-${props.list}-container`}>
+            <h3 className={`list-${props.list}__title`}>{props.title}</h3>
+            <ul className={`list-${props.list}__list`}>
                 {gameList}
             </ul>
-            <Link className="list-summary__lnk" to={`/category/${props.title}`}>More Games...</Link>
+            <Link className={`list-${props.list}__lnk`} to={`/list/category/${props.title.toLowerCase()}`}>More Games...</Link>
         </div>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        games: state.games[ownProps.type]
+        games: state.games[ownProps.gameType]
     }
 }
 

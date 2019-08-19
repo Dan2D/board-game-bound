@@ -1,7 +1,8 @@
 p, a {
     font-size: 15px;
 }
-.list-summary{
+.list-summary,
+.list-full {
     &-container {
         @include flex(column, flex-start, center);
     }

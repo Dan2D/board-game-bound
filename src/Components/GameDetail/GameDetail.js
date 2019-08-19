@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {getGameDetail, getdetailGameImg} from "../../Store/Actions/gamesActions";
 import { connect } from 'react-redux'
 import GameBlock from "./GameBlock"
+import Rating from "../Parts/Rating";
 
 const mapDispatchToProps = dispatch =>{
     return {
@@ -25,11 +26,7 @@ function GameDetail(props) {
     if (props.detailGame.loading){
         return <div>Loading...</div>;
     }
-    return (
-        <div>
-            <GameBlock />
-        </div>
-    )
+    return  <GameBlock />;
 }
 const mapStateToProps = state => {
     return {

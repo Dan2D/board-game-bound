@@ -1,6 +1,7 @@
 import axios from "axios";
-import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG} from "./types";
+import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES} from "./types";
 import {API_CALLS} from "../../Utils/API_CALLS";
+import store from "../index";
 
 const {CLIENT_ID} = API_CALLS["BGA"];
 
@@ -96,7 +97,13 @@ export const getDetailBG = (game, id, backupImg, dispatch) => {
 export const getDetailPrice = (game, id, backupImg, bg, dispatch) => {
     axios.get(`https://www.boardgameatlas.com/api/game/prices?game_id=${id}&client_id=7pxbmyR661`)
     .then(response => {
-        let purchaseInfo = response.data.prices;
+        let purchaseInfo = response.data.prices.sort((a,b) => {
+            let aPrice = a.price_text;
+            let bPrice = b.price_text;
+            aPrice = aPrice[0] === "$" ? aPrice.substr(1) : 999.99;
+            bPrice = bPrice[0] === "$" ? bPrice.substr(1) : 999.99;
+            return (parseFloat(aPrice) - parseFloat(bPrice));
+        }).filter(item => item.price_text.toLowerCase() !== "out of stock");
         dispatch({
             type: SET_DETAIL_GAME,
             payload: game[0],
@@ -105,6 +112,49 @@ export const getDetailPrice = (game, id, backupImg, bg, dispatch) => {
         })
     })
 }
+
+export const getSearchResults = searchTxt => dispatch => {
+    axios.get(`https://www.boardgameatlas.com/api/search?name=${searchTxt}&client_id=7pxbmyR661`)
+    .then(response => {
+        dispatch({
+            type: SET_SEARCH_GAMES,
+            payload: response.data.games
+        })
+    })
+}
+
+export const getCategories = dispatch => {
+    axios.get(`https://www.boardgameatlas.com/api/game/categories?pretty=true&client_id=7pxbmyR661`)
+    .then(response => {
+        dispatch({
+            type: SET_CATEGORIES,
+            payload: response.data.categories
+        })
+    })
+}
+
+// TODO(WILL GET CATEGORY ID FROM BUTTONS, NO NEED TO SEARCH)
+export const getCategoryResults = category => dispatch => {
+    console.log(category)
+    let url;
+    if (category.toLowerCase() === "top games"){
+        console.log("test")
+        url = `https://www.boardgameatlas.com/api/search?order_by=reddit_week_count&limit=15&client_id=7pxbmyR661`;
+    }
+    else if (category.toLowerCase() === "trending games"){
+        url = `https://www.boardgameatlas.com/api/search?order_by=popularity&limit=15&client_id=7pxbmyR661`
+    }
+    else{url = `https://www.boardgameatlas.com/api/search?categories=${category}&limit=15&client_id=7pxbmyR661`}
+    console.log(url);
+    axios.get(url)
+    .then(response => {
+        dispatch({
+            type: SET_SEARCH_GAMES,
+            payload: response.data.games
+        })
+    })
+}
+
 
 export const setGameLoading = (name, bool) => {
     let gameType = name === "new" ? "newGames" : name === "search" ? "searchGames" : name === "detail" ? "detailGame" : "trendingGames";

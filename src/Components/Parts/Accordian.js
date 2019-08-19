@@ -3,13 +3,7 @@ import React, {useState} from 'react'
 function Accordian(props) {
     const [toggle, setToggle] = useState(false);
     let priceArr = props.content;
-    priceArr.sort((a,b) => {
-        let aPrice = a.price_text;
-        let bPrice = b.price_text;
-        aPrice = aPrice[0] === "$" ? aPrice.substr(1) : 999.99;
-        bPrice = bPrice[0] === "$" ? bPrice.substr(1) : 999.99;
-        return (parseFloat(aPrice) - parseFloat(bPrice));
-    })
+
     function genBuyLnks(content){
        return content.map(item => {
            return( 
@@ -25,7 +19,7 @@ function Accordian(props) {
     return (
         <div className={`accordian-container accordian--${toggle ? "open" : "closed"} accordian--${props.class}`}>
             <button className={`accordian`} onClick={() => setToggle(!toggle)}>{props.title}<img src={require("./Images/arrow-icon.png")} alt="arrow"/></button>
-            {genBuyLnks(priceArr)}
+            {priceArr.length > 0 ? genBuyLnks(priceArr) : <p>No Stock Available...</p>}
         </div>
     )
 }

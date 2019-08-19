@@ -22,8 +22,8 @@ function Home(props) {
     return (
         <div className="hero-container">
             <Hero />
-            <List title="TRENDING GAMES" type="trendingGames" list="summary"/>
-            <List title="TOP GAMES" type="topGames" list="summary"/>
+            <List title="TRENDING GAMES" gameType="trendingGames" list="summary"/>
+            <List title="TOP GAMES" gameType="topGames" list="summary"/>
         </div>
     )
 }

@@ -23,6 +23,10 @@ export const initialState = {
         detailGame: {
             game: {},
             loading: true
+        },
+        categories: {
+            list: [],
+            loading: true
         }
     }
 };

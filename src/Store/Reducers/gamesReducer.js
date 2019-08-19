@@ -1,4 +1,4 @@
-import {GAMES_LOADING, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG} from "../Actions/types";
+import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES} from "../Actions/types";
 
 const gamesReducer = (state = {}, action) =>{
     switch(action.type){
@@ -45,6 +45,27 @@ const gamesReducer = (state = {}, action) =>{
                 detailGame: {
                     ...state.detailGame,
                     image: action.payload
+                }
+            }
+        case SET_SEARCH_GAMES:
+            return {
+                ...state,
+                searchGames: {
+                    ...state.searchGames,
+                    list: action.payload,
+                    loading: false
+                }
+            }
+        case SET_CATEGORIES:
+            let catList = {};
+            action.payload.forEach(category => {
+              return  catList[category.name] = category.id;
+            })
+            return {
+                ...state,
+                categories: {
+                    list: catList,
+                    loading: false
                 }
             }
         case GAMES_LOADING:

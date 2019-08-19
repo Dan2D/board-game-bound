@@ -4,9 +4,9 @@ import Accordian from "../Parts/Accordian";
 function Price(props) {
     return (
         <div>
-            {props.discount > 0 ? 
+            {props.price.slice(0) !== props.msrp ? 
             <p className={`${props.class}__price`}>
-                ${props.price}
+                {props.price}
             </p> 
             : null}
             <p className={`${props.class}__msrp` + (props.msrp !== props.price ? "--strike" : null)}>

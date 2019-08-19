@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import GameDetail from "../GameDetail/GameDetail";
+import Search from "../Search/Search";
 
 // Think about gameName vs GameID for games in New Games vs Trending/Top, (BGG id's don't match Board Game Atlas)
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home}/>
         <Route path="/game/:gameName/:gameId" component={GameDetail}/>
+        <Route path="/list/:searchType/:text" component={Search}/>
       </Switch>
       </div>
     </Router>

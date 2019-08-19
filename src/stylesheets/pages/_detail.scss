@@ -12,6 +12,7 @@
     &__title-container {
         position: relative;
         display: inline-block;
+        margin-top: 5px;
         margin-bottom: $titleFontSize;
     }
     &__title {
@@ -46,9 +47,6 @@
             }
         }
     }
-    &__msrp--strike {
-        @extend .info-block__msrp--strike;
-    }
     &__buy-lnk {
         cursor: pointer;
     }
@@ -72,4 +70,8 @@
 
 .description-container {
     margin:5px 0;
+}
+
+.detail__msrp--strike {
+        @extend .info-block__msrp--strike;
 }

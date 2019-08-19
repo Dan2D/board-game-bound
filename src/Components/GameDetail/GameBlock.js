@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Rating from "../Parts/Rating";
 import Icon from "../Parts/Icon";
 import Price from "../Parts/Price";
 import Description from "./Description";
@@ -10,6 +11,7 @@ function GameBlock(props) {
     return (
         <div className="detail-game-block">
             <img className="detail-game-block__bg" style={{backgroundImage: `url("${props.bg}")`}} src={require("./Images/bg-overlay.png")} alt="board game cover" />
+            <Rating class="detail" rating={props.game.average_user_rating} numReviews={props.game.num_user_ratings}/>
             <div className="detail-game-block--layout">
                 <div className="detail-game-block__title-container">
                     <h3 className="detail-game-block__title">{props.game.name.toUpperCase()}</h3>
@@ -23,8 +25,8 @@ function GameBlock(props) {
                         <Icon type="detail" path="./Images/age-icon.png" name="age" min={props.game.min_age}/>
                     </div>
                 </div>
-                <Price class="detail" price={props.game.price} msrp={props.game.msrp} discount={props.game.discount} buyLnks={props.buyLnks}/>
-                <Description dscrpt={props.game.description} url={props.game.official_url ? props.game.official_url  : props.game.url}/>
+                <Price class="detail" price={props.buyLnks[0].price_text} msrp={props.game.msrp} discount={props.game.discount} buyLnks={props.buyLnks}/>
+                <Description dscrpt={props.game.description} url={props.game.official_url ? props.game.official_url  : props.game.url} rules={props.game.rules_url}/>
                 <MakerBlock designers={props.game.designers} artists={props.game.artists} publisher={props.game.primary_publisher}/>
             </div>
         </div>
