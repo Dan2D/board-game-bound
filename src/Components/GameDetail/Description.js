@@ -7,7 +7,7 @@ function Description(props) {
             <p className="detail-game-block__dscrpt-title"><strong>Description</strong></p>
             <p className="detail-game-block__dscrpt-body" id="description"></p>
             <div className="detail-game-block__site-url">
-                <p><strong>Official Website:</strong></p>
+                <p><strong>Website:</strong></p>
                 <a href={props.url} target="_blank" rel="noopener noreferrer">
                     {props.url}
                 </a>

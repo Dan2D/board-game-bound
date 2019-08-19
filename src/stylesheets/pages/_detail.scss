@@ -49,6 +49,9 @@
     &__msrp--strike {
         @extend .info-block__msrp--strike;
     }
+    &__buy-lnk {
+        cursor: pointer;
+    }
     &__dscrpt-title {
         font-size: $secondaryTitleFontSize;
     }

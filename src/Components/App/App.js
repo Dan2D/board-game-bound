@@ -12,7 +12,7 @@ function App() {
         <Header />
       <Switch>
         <Route path="/" exact component={Home}/>
-        <Route path="/game/:gameId" component={GameDetail}/>
+        <Route path="/game/:gameName/:gameId" component={GameDetail}/>
       </Switch>
       </div>
     </Router>

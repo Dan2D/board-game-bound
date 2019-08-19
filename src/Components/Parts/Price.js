@@ -1,4 +1,5 @@
 import React from 'react'
+import Accordian from "../Parts/Accordian";
 
 function Price(props) {
     return (
@@ -11,6 +12,7 @@ function Price(props) {
             <p className={`${props.class}__msrp` + (props.msrp !== props.price ? "--strike" : null)}>
                 MSRP {`$${props.msrp}`}
             </p>
+            {props.class === "detail" ? <Accordian class={props.class} content={props.buyLnks} title="Buy Links"/> : null}
         </div>
     )
 }

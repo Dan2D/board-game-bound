@@ -29,13 +29,10 @@ export const getSummaryGames = (criteria = "popularity") => dispatch => {
 export const getNewGames = dispatch => {
     getGameIds(`https://www.boardgamegeek.com/xmlapi2/hot?type=boardgame`, 5)
     .then(ids => {
-        console.log(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${ids}`)
-        return axios.get(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${ids}`)
+        return fetchXML(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${ids}`)
     })
     .then(response => {
-        let parser = new DOMParser();
-        let xml = parser.parseFromString(response.data, "text/xml");
-        let nodes = xml.querySelectorAll('items item');
+        let nodes = response.querySelectorAll('items item');
         let games = [];
         nodes.forEach(game => {
             games.push( {
@@ -52,27 +49,34 @@ export const getNewGames = dispatch => {
     });
 };
 
-export const getdetailGameImg = name => dispatch => {
-    // TODO(PASS YEAR PUBLISHED WITH NAME TO GET BETTER MATCH OF GAME)
-    console.log(`https://www.boardgamegeek.com/xmlapi2/search?thing=boardgame&query=${name}&exact=1`)
+export const getdetailGameImg = (name, gameId = "0") => dispatch => {
+    if (gameId !== "0"){
+        return (
+            fetchXML(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${gameId}`)
+            .then(response => {
+                let img = response.querySelectorAll('items item image')[0].innerHTML;
+                dispatch({
+                    type: SET_DETAIL_IMG,
+                    payload: img
+                })
+            })
+        )
+    }
+    name = modifyName(name);
     getGameIds(`https://www.boardgamegeek.com/xmlapi2/search?thing=boardgame&query=${name}&exact=1`, 1)
     .then(id => {
-        console.log(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${id}`)
-        axios.get(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${id}`)
-        .then(response => {
-            let parser = new DOMParser();
-            let xml = parser.parseFromString(response.data, "text/xml");
-            let img = xml.querySelectorAll('items item image')[0].innerHTML;
-            dispatch({
-                type: SET_DETAIL_IMG,
-                payload: img
-            })
+        return fetchXML(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${id}`)
+    })
+    .then(response => {
+        let img = response.querySelectorAll('items item image')[0].innerHTML;
+        dispatch({
+            type: SET_DETAIL_IMG,
+            payload: img
         })
     })
 }
 
 export const getGameDetail = name => dispatch => {
-    console.log(`https://www.boardgameatlas.com/api/search?name=${name}&limit=1&client_id=7pxbmyR661`)
     axios.get(`https://www.boardgameatlas.com/api/search?name=${name}&limit=1&client_id=7pxbmyR661`)
     .then (response => {
         let id = response.data.games[0].id;
@@ -82,16 +86,24 @@ export const getGameDetail = name => dispatch => {
 };
 
 export const getDetailBG = (game, id, backupImg, dispatch) => {
-    console.log(`https://www.boardgameatlas.com/api/game/images?game_id=${id}&include_game=true&limit=1&client_id=7pxbmyR661`)
     axios.get(`https://www.boardgameatlas.com/api/game/images?game_id=${id}&include_game=true&limit=1&client_id=7pxbmyR661`)
     .then(response => {
         let bg = response.data.images ? backupImg : response.data.images[0].large;
+        getDetailPrice(game, id, backupImg, bg, dispatch);
+    });
+}
+
+export const getDetailPrice = (game, id, backupImg, bg, dispatch) => {
+    axios.get(`https://www.boardgameatlas.com/api/game/prices?game_id=${id}&client_id=7pxbmyR661`)
+    .then(response => {
+        let purchaseInfo = response.data.prices;
         dispatch({
             type: SET_DETAIL_GAME,
             payload: game[0],
-            bg
-        });
-    });
+            bg,
+            purchaseInfo
+        })
+    })
 }
 
 export const setGameLoading = (name, bool) => {
@@ -106,19 +118,33 @@ export const genRand = () => {
     return Math.ceil(Math.random()*100);
 }
 
-export const getGameIds = (url, num) => {
-    return (
+export const fetchXML = url => {
+    return(
         axios.get(url)
         .then(response => {
             let parser = new DOMParser();
             let xml = parser.parseFromString(response.data, "text/xml");
+            return xml;
+        })
+    )
+}
+
+export const getGameIds = (url, num) => {
+    return (
+        fetchXML(url)
+        .then(xml => {
             let nodes = xml.querySelectorAll('items item');
             let ids = [];
             for (let i = 0; i < num; i++){
                 ids.push(nodes[i].getAttribute("id"));
             }
             return ids = ids.join(",");
-            })
-    )
+        })
+    )    
 }
+
+export const modifyName = name => {
+    return name.replace(/(\s)?[\d](st|nd|rd|th)?(.*)/gi, "");
+}
+
 

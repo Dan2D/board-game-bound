@@ -19,7 +19,7 @@ if (props.games.loading){
         }
         return (
         <li key={game.name} className="list-item">
-            <Link className="list-item__lnk" to={`/game/${game.name}`}>
+            <Link className="list-item__lnk" to={`/game/${game.name}/0`}>
             <GameList 
             type={props.type}
             src={game.images.small}

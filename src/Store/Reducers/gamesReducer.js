@@ -35,6 +35,7 @@ const gamesReducer = (state = {}, action) =>{
                     ...state.detailGame,
                     game: action.payload,
                     bg: action.bg,
+                    purchaseInfo: action.purchaseInfo,
                     loading: false
                 }
             }

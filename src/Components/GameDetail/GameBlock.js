@@ -23,8 +23,8 @@ function GameBlock(props) {
                         <Icon type="detail" path="./Images/age-icon.png" name="age" min={props.game.min_age}/>
                     </div>
                 </div>
-                <Price class="detail-game-block" price={props.game.price} msrp={props.game.msrp} discount={props.game.discount}/>
-                <Description dscrpt={props.game.description} url={props.game.url}/>
+                <Price class="detail" price={props.game.price} msrp={props.game.msrp} discount={props.game.discount} buyLnks={props.buyLnks}/>
+                <Description dscrpt={props.game.description} url={props.game.official_url ? props.game.official_url  : props.game.url}/>
                 <MakerBlock designers={props.game.designers} artists={props.game.artists} publisher={props.game.primary_publisher}/>
             </div>
         </div>
@@ -33,9 +33,11 @@ function GameBlock(props) {
 
 const mapStateToProps = state => {
     return {
+        game: state.games.detailGame.game,
         bg: state.games.detailGame.bg,
         image: state.games.detailGame.image,
-        game: state.games.detailGame.game
+        buyLnks: state.games.detailGame.purchaseInfo
+        
     }
 }
 

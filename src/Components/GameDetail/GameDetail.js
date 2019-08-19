@@ -8,8 +8,8 @@ const mapDispatchToProps = dispatch =>{
         getGameDetail: (name) => {
             dispatch(getGameDetail(name));
         },
-        getdetailGameImg: (name) => {
-            dispatch(getdetailGameImg(name));
+        getdetailGameImg: (name, id) => {
+            dispatch(getdetailGameImg(name, id));
         }
         
     }
@@ -18,8 +18,9 @@ const mapDispatchToProps = dispatch =>{
 function GameDetail(props) {
     const {getGameDetail, getdetailGameImg} = props;
     useEffect(() => {
-        getGameDetail(props.match.params.gameId);
-        getdetailGameImg(props.match.params.gameId);
+        let id = props.match.params.gameId ? props.match.params.gameId : null;
+        getGameDetail(props.match.params.gameName, id);
+        getdetailGameImg(props.match.params.gameName, id);
     }, [getGameDetail, props.match.params, getdetailGameImg]);
     if (props.detailGame.loading){
         return <div>Loading...</div>;
