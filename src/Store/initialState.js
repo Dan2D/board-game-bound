@@ -18,6 +18,8 @@ export const initialState = {
         },
         searchGames: {
             list: {},
+            filteredList: null,
+            filter: false,
             loading: true
         },
         detailGame: {

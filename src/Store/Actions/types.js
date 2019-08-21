@@ -1,4 +1,6 @@
 export const GAMES_LOADING = 'GAMES_LOADING';
+export const FILTER_GAMES = 'FILTER_GAMES';
+export const SORT_GAMES = 'SORT_GAMES';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const NEW_GAME_NAMES = 'NEW_GAME_NAMES';
 export const GET_NEW_GAMES = 'GET_NEW_GAMES';

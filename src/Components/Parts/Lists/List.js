@@ -1,16 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import GameList from "./GameList";
 import InfoList from "./InfoList";
 
 function List(props) {
-// TODO(Add arrow for accordian minize)
+    const [filteredList, setFilteredList] = useState(props.games.list);
+    // if (props.gameType === "searchGames")
+    let games = props.gameType === "searchGames" && props.games.filteredList !== null ? props.games.filteredList : props.games.list;
 if (props.games.loading){
     return <div>LOADING...</div>
 }
-    const gameList = props.games.list.map((game, indx) => {
-        if (props.list === "summary" && indx > 4){
+        const gameList = games.map((game, indx) => {
+        if ((props.list === "summary" && indx > 4) || indx > 14){
             return null;
         }
         let rating = game.average_user_rating;

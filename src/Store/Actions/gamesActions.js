@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES} from "./types";
+import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES, FILTER_GAMES, SORT_GAMES} from "./types";
 import {API_CALLS} from "../../Utils/API_CALLS";
 import store from "../index";
 
@@ -139,12 +139,12 @@ export const getCategoryResults = category => dispatch => {
     let url;
     if (category.toLowerCase() === "top games"){
         console.log("test")
-        url = `https://www.boardgameatlas.com/api/search?order_by=reddit_week_count&limit=15&client_id=7pxbmyR661`;
+        url = `https://www.boardgameatlas.com/api/search?order_by=reddit_week_count&client_id=7pxbmyR661`;
     }
     else if (category.toLowerCase() === "trending games"){
-        url = `https://www.boardgameatlas.com/api/search?order_by=popularity&limit=15&client_id=7pxbmyR661`
+        url = `https://www.boardgameatlas.com/api/search?order_by=popularity&client_id=7pxbmyR661`
     }
-    else{url = `https://www.boardgameatlas.com/api/search?categories=${category}&limit=15&client_id=7pxbmyR661`}
+    else{url = `https://www.boardgameatlas.com/api/search?categories=${category}&client_id=7pxbmyR661`}
     console.log(url);
     axios.get(url)
     .then(response => {
@@ -152,6 +152,16 @@ export const getCategoryResults = category => dispatch => {
             type: SET_SEARCH_GAMES,
             payload: response.data.games
         })
+    })
+}
+
+export const filterGames = (filterObj, filterName, checkVal) => dispatch => {
+    console.log(filterObj, filterName)
+    dispatch({
+        type: FILTER_GAMES,
+        payload: filterObj,
+        filterName,
+        checkVal
     })
 }
 
@@ -163,10 +173,30 @@ export const setGameLoading = (name, bool) => {
             payload: bool}
 }
 
-
-export const genRand = () => {
-    return Math.ceil(Math.random()*100);
+export const genFilterObj = (category, type, val) => {
+    let categories = {
+        "players": "_players",
+        "time": "_playtime",
+        "age": "_age",
+        "year": "year_published",
+        "discount": "discount",
+        "price": "price",
+        "rating": "average_user_rating"
+    };
+    if (category === "players" || category === "time" || category === "age") {
+        let prefix = "";
+        if (type === "gt" || type === ">") {
+            prefix = "min"
+        }
+        else if (type === "lt" || type === "<"){
+            prefix = "max"
+        }
+        return {name: prefix + categories[category], type, val}
+    }
+    return {name: categories[category], type, val}
 }
+
+
 
 export const fetchXML = url => {
     return(

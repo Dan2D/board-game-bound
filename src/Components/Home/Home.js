@@ -22,10 +22,17 @@ function Home(props) {
     return (
         <div className="hero-container">
             <Hero />
-            <List title="TRENDING GAMES" gameType="trendingGames" list="summary"/>
-            <List title="TOP GAMES" gameType="topGames" list="summary"/>
+            <List title="TRENDING GAMES" gameList={props.trendingGames} gameType="trendingGames" list="summary"/>
+            <List title="TOP GAMES" gameList={props.topGames} gameType="topGames" list="summary"/>
         </div>
     )
 }
 
-export default connect(null, mapDispatchToProps)(Home)
+const mapStateToProps = state => {
+    return {
+        topGames: state.games.topGames.list,
+        trendingGames: state.games.trendingGames.list
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

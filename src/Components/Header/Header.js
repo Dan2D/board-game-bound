@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
 function Header(props) {
     const {getCategories} = props;
     useEffect(() => {
-        getCategories();
+        // getCategories();
     }, [getCategories]);
     return (
         <div className="header-container">

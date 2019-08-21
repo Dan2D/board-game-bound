@@ -496,6 +496,10 @@ button, a {
   cursor: pointer;
 }
 
+button {
+  border-radius: 5px;
+}
+
 /**
  * Basic typography style for copy text
  */
@@ -1091,6 +1095,10 @@ button {
   opacity: 0.7;
 }
 
+.filter-name {
+  display: inline;
+}
+
 .detail-game-block {
   position: relative;
 }
@@ -1205,12 +1213,19 @@ button {
 }
 
 .search__btn {
-  background: lightgray;
+  background: #919191;
+  font-size: 16px;
 }
 
 .search__btn img {
   height: 20px;
   vertical-align: middle;
   margin-left: 5px;
+}
+
+.sort-filter-set {
+  display: inline-block;
+  position: absolute;
+  right: 0;
 }
 /*# sourceMappingURL=main.css.map */

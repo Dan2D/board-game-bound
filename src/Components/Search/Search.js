@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux'
 import {getSearchResults, getCategoryResults} from "../../Store/Actions/gamesActions";
 import List from "../Parts/Lists/List";
+import Filter from "./Filter/Filter";
+
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -14,7 +16,10 @@ const mapDispatchToProps = dispatch => {
     }
 }
 // TODO(ADD PAGINATION, ADD CATEGORY BUTTONS, ADD FUNCTIONALITY FOR SORT AND FILTER)
+// TODO(PASS FILTERED LIST TO LIST COMP, FIX ERRORS)
 function Search(props) {
+
+    
     const {getSearchResults, getCategoryResults} = props;
     useEffect(() => {
         if (props.match.params.searchType === "search"){
@@ -26,13 +31,11 @@ function Search(props) {
     if (props.loading){
         return <div>LOADING...</div>
     }
+
     return (
         <div>
-            <div className="sort-filter-set">
-                <button className="search__btn search__btn--filter">Filter<img src={require("./Images/filter-icon.png")} alt="filter icon"/></button>
-                <button className="search__btn search__btn--sort">Sort<img src={require("./Images/sort-icon.png")} alt="sort icon"/></button>
-            </div>
-            <List title={props.match.params.text.toUpperCase()} gameType="searchGames" list="full"/>
+            <Filter />
+            <List title={props.match.params.text.toUpperCase()}  gameType="searchGames" list="full"/>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES} from "../Actions/types";
+import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES, FILTER_GAMES, SORT_GAMES} from "../Actions/types";
 
 const gamesReducer = (state = {}, action) =>{
     switch(action.type){
@@ -66,6 +66,63 @@ const gamesReducer = (state = {}, action) =>{
                 categories: {
                     list: catList,
                     loading: false
+                }
+            }
+        case FILTER_GAMES:
+            let filteredList = state.searchGames.list;
+            if (Object.keys(action.payload).length === 0){
+                return {
+                    ...state,
+                    searchGames: {
+                        ...state.searchGames,
+                        filteredList: null,
+                        filter: false
+                    }
+                }
+            }
+            if (action.checkVal){
+                filteredList = !state.searchGames.filter ? state.searchGames.list : state.searchGames.filteredList
+                if (action.payload[0].name.includes("-")){
+                    filteredList = filteredList.filter(game => {return game[action.payload[0].minName] >= action.payload[0].min && game[action.payload[0].maxName] <= action.payload[0].max});
+                }
+                else if (action.payload[0].name.includes("+")){
+                    if (action.payload[0].max !== null){
+                    filteredList = filteredList.filter(game => {return game[action.payload[0].minName] > action.payload[0].min && game[action.payload[0].maxName] >= action.payload[0].max});
+                    }
+                    else {
+                        filteredList = filteredList.filter(game => {return game[action.payload[0].minName] >= action.payload[0].min});
+                    }
+                }
+                else if (action.payload[0].name.includes("<")){
+                    filteredList = filteredList.filter(game => {return game[action.payload[0].maxName] <= action.payload[0].max});
+                }
+            }
+            else {
+                filteredList = state.searchGames.list;
+                action.payload.forEach(filter => {
+                    if (filter.name.includes("-")){
+                        filteredList = filteredList.filter(game => {return game[filter.minName] >= filter.min && game[filter.maxName] <= filter.max});
+                    }
+                    else if (filter.name.includes("+")){
+                        if (filter.max !== null){
+                        filteredList = filteredList.filter(game => {return game[filter.minName] > filter.min && game[filter.maxName] >= filter.max});
+                        }
+                        else {
+                            filteredList = filteredList.filter(game => {return game[filter.minName] >= filter.min});
+                        }
+                    }
+                    else if (filter.name.includes("<")){
+                        filteredList = filteredList.filter(game => {return game[filter.maxName] <= filter.max});
+                    }
+                })
+            }
+            
+            return {
+                ...state,
+                searchGames: {
+                    ...state.searchGames,
+                    filteredList,
+                    filter: true
                 }
             }
         case GAMES_LOADING:
