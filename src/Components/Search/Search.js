@@ -34,7 +34,6 @@ function Search(props) {
 
     return (
         <div>
-            <Filter />
             <List title={props.match.params.text.toUpperCase()}  gameType="searchGames" list="full"/>
         </div>
     )

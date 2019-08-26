@@ -1,7 +1,17 @@
 import axios from "axios";
-import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES, FILTER_GAMES, SORT_GAMES} from "./types";
+import {
+    GAMES_LOADING, 
+    SET_CATEGORIES, 
+    GET_NEW_GAMES, 
+    GET_SUMMARY_GAMES, 
+    SET_DETAIL_GAME, 
+    SET_DETAIL_IMG, 
+    SET_SEARCH_GAMES, 
+    FILTER_GAMES, 
+    SORT_GAMES,
+    GET_NEW_PAGE} from "./types";
 import {API_CALLS} from "../../Utils/API_CALLS";
-import store from "../index";
+
 
 const {CLIENT_ID} = API_CALLS["BGA"];
 
@@ -135,7 +145,6 @@ export const getCategories = dispatch => {
 
 // TODO(WILL GET CATEGORY ID FROM BUTTONS, NO NEED TO SEARCH)
 export const getCategoryResults = category => dispatch => {
-    console.log(category)
     let url;
     if (category.toLowerCase() === "top games"){
         console.log("test")
@@ -145,7 +154,6 @@ export const getCategoryResults = category => dispatch => {
         url = `https://www.boardgameatlas.com/api/search?order_by=popularity&client_id=7pxbmyR661`
     }
     else{url = `https://www.boardgameatlas.com/api/search?categories=${category}&client_id=7pxbmyR661`}
-    console.log(url);
     axios.get(url)
     .then(response => {
         dispatch({
@@ -156,7 +164,6 @@ export const getCategoryResults = category => dispatch => {
 }
 
 export const filterGames = (filterObj, filterName, checkVal) => dispatch => {
-    console.log(filterObj, filterName)
     dispatch({
         type: FILTER_GAMES,
         payload: filterObj,
@@ -165,6 +172,21 @@ export const filterGames = (filterObj, filterName, checkVal) => dispatch => {
     })
 }
 
+export const sortGames = (sort, top) => dispatch => {
+    console.log(sort,top)
+    dispatch({
+        type: SORT_GAMES,
+        sort,
+        top
+    })
+}
+
+export const newPage = (pg) => dispatch => {
+    dispatch({
+        type: GET_NEW_PAGE,
+        payload: pg
+    })
+}
 
 export const setGameLoading = (name, bool) => {
     let gameType = name === "new" ? "newGames" : name === "search" ? "searchGames" : name === "detail" ? "detailGame" : "trendingGames";

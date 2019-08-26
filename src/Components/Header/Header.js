@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import {Link} from "react-router-dom";
 import {getCategories} from "../../Store/Actions/gamesActions";
+import Filter from "../Search/Filter/Filter";
+import Sort from "../Search/Sort/Sort";
 import Title from "./Title";
 import Searchbar from "./Searchbar";
 
@@ -20,9 +22,14 @@ function Header(props) {
     }, [getCategories]);
     return (
         <div className="header-container">
-            <Title/>
-            <Searchbar/>
-            <Link className="home-lnk" to="/"><img src={require("./Images/home-icon.png")} alt="home icon"/></Link>
+            <div className="header-top">
+                <Title/>
+                <Searchbar/>
+            </div>
+            <div className="header-bottom" style={{}}>
+                <Sort />
+                <Filter />
+            </div>
         </div>
     )
 }

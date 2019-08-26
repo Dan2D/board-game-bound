@@ -8,7 +8,7 @@ import Search from "../Search/Search";
 // Think about gameName vs GameID for games in New Games vs Trending/Top, (BGG id's don't match Board Game Atlas)
 function App() {
   return (
-    <Router>
+    <Router basename="/board-game-bound/">
       <div className="App">
         <Header />
       <Switch>

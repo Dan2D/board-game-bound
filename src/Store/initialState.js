@@ -18,9 +18,10 @@ export const initialState = {
         },
         searchGames: {
             list: {},
-            filteredList: null,
+            modList: null,
             filter: false,
-            loading: true
+            loading: true,
+            pg: 1
         },
         detailGame: {
             game: {},

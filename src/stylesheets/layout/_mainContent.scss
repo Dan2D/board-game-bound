@@ -19,6 +19,12 @@ p, a {
         font-size: 13px;
         margin-top: -10px;
         align-self: flex-end;
+        &--title {
+            font-size: 18px;
+            margin-top: 10px;
+            align-self: flex-start;
+            font-style: normal;
+        }
     }
     
 }

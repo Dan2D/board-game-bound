@@ -1,4 +1,14 @@
-import {GAMES_LOADING, SET_CATEGORIES, GET_NEW_GAMES, GET_SUMMARY_GAMES, SET_DETAIL_GAME, SET_DETAIL_IMG, SET_SEARCH_GAMES, FILTER_GAMES, SORT_GAMES} from "../Actions/types";
+import {
+    GAMES_LOADING, 
+    SET_CATEGORIES, 
+    GET_NEW_GAMES, 
+    GET_SUMMARY_GAMES, 
+    SET_DETAIL_GAME, 
+    SET_DETAIL_IMG, 
+    SET_SEARCH_GAMES, 
+    FILTER_GAMES, 
+    SORT_GAMES,
+    GET_NEW_PAGE} from "../Actions/types";
 
 const gamesReducer = (state = {}, action) =>{
     switch(action.type){
@@ -53,6 +63,7 @@ const gamesReducer = (state = {}, action) =>{
                 searchGames: {
                     ...state.searchGames,
                     list: action.payload,
+                    modList: action.payload,
                     loading: false
                 }
             }
@@ -68,6 +79,30 @@ const gamesReducer = (state = {}, action) =>{
                     loading: false
                 }
             }
+        case SORT_GAMES:
+
+            let sortedList = state.searchGames.modList.sort((a,b) => {
+                if (action.top === "high"){
+                    if (action.sort === "name") {
+                        return a[action.sort] > b[action.sort];
+                    }
+                    return parseFloat(a[action.sort]) < parseFloat(b[action.sort]);
+                }
+                else {
+                    if (action.sort === "name") {
+                        return a[action.sort] < b[action.sort];
+                    }
+                    return parseFloat(a[action.sort]) > parseFloat(b[action.sort]);
+                }
+            })
+
+            return {
+                ...state,
+                searchGames: {
+                    ...state.searchGames,
+                    modList: sortedList
+                }
+            }
         case FILTER_GAMES:
             let filteredList = state.searchGames.list;
             if (Object.keys(action.payload).length === 0){
@@ -75,7 +110,7 @@ const gamesReducer = (state = {}, action) =>{
                     ...state,
                     searchGames: {
                         ...state.searchGames,
-                        filteredList: null,
+                        modList: state.searchGames.list,
                         filter: false
                     }
                 }
@@ -121,8 +156,16 @@ const gamesReducer = (state = {}, action) =>{
                 ...state,
                 searchGames: {
                     ...state.searchGames,
-                    filteredList,
+                    modList: filteredList,
                     filter: true
+                }
+            }
+        case GET_NEW_PAGE:
+            return {
+                ...state,
+                searchGames: {
+                    ...state.searchGames,
+                    pg: action.payload
                 }
             }
         case GAMES_LOADING:

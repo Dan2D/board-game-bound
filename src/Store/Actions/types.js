@@ -8,3 +8,4 @@ export const GET_SUMMARY_GAMES = 'GET_SUMMARY_GAMES';
 export const SET_DETAIL_GAME = 'SET_DETAIL_GAME';
 export const SET_DETAIL_IMG = 'SET_DETAIL_IMG';
 export const SET_SEARCH_GAMES = 'SET_SEARCH_GAMES';
+export const GET_NEW_PAGE = 'GET_NEW_PAGE';

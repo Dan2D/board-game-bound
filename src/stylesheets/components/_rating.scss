@@ -1,7 +1,7 @@
 .rating {
-    background: $secondary-color;
+    // background: $secondary-color;
     position: relative;
-    width: 50px;
+    min-width: 50px;
     text-align: center;
     margin-right: 10px;
     &::after {
@@ -10,9 +10,11 @@
         position: absolute;
         bottom: -14px;
         right: 0;
-        border-top: 15px solid $secondary-color;
+        border-top: 15px solid;
+        border-color: inherit;
         border-left:25px solid transparent;
         border-right: 25px solid transparent;
+       
     }
     &--detail {
         position: absolute;
@@ -21,7 +23,8 @@
         width: 75px;
         &::after {
             bottom: -20px;
-            border-top: 20px solid $secondary-color;
+            border-top: 20px solid;
+            border-color: inherit;
             border-left:40px solid transparent;
             border-right: 35px solid transparent;
         }
