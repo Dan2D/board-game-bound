@@ -5,7 +5,13 @@
     margin-top: $headerHt;
 }
 
-.category-container {
-    @include flex(row, space-evenly);
-    flex-wrap: wrap;
+.category{
+    &-container--btns {
+        @include flex(row, space-evenly);
+        flex-wrap: wrap;
+    }
+    &__title {
+        font-size: $minTitleFontSize;
+        margin-left: 5px;
+    }
 }

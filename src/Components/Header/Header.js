@@ -26,14 +26,11 @@ function Header(props) {
                 <Title/>
                 <Searchbar/>
             </div>
+            {props.content === "search" &&
             <div className="header-bottom" style={{}}>
-                {props.content === "search" ? 
-                <>
-                    <Sort />
                     <Filter /> 
-                </> 
-                : null}
             </div>
+            }
         </div>
     )
 }

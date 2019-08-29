@@ -7,7 +7,6 @@
     position: fixed;
     top: 0;
     z-index: 3;
-    background: rgba(0,0,0,0.9);
     width: 100vw;
     height: $headerHt;
     }
@@ -15,7 +14,8 @@
         @include flex(row, space-between, baseline);
         width: 100%;
         position: relative;
-        margin:5px;
+        padding:5px;
+        background: rgba(0,0,0,0.9);
     }
     &-bottom {
         @include flex(row, flex-end);
@@ -90,18 +90,22 @@
         @include flex(row, space-between);
         @extend .sort-filter;
         flex-flow: wrap;
+        width: 285px;
+        left: 0;
         right: 0;
-        border-radius: 5px 0 0 5px;
+        margin: auto;
+        margin-top: 10px;
+        border-radius: 10px;
         &__btn--close {
             @extend .btn--close
         }
         &--show {
             transform: translateX(0);
-            transition: transform 600ms ease-out;
+            transition: transform 700ms ease-out;
         }
         &--hide {
             transform: translateX(150%);
-            transition: transform 600ms ease-in;
+            transition: transform 700ms ease-in;
         }
     }
     &-list {
@@ -113,40 +117,26 @@
 
 .sort {
     &-container {
-        @extend .sort-filter;
-        left: 0;
-        border-radius: 0 5px 5px 0;
-        &__btn--close {
-            @extend .btn--close
+        align-self: flex-start;
+        margin-left: 5px;
+        &__select {
+            background: black;
+            font-size: 16px;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            background-position: 97%;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            border: none;
+            border-radius: 5px;
         }
-        &__group {
-            @include flex(column); 
-        }
-        &--show {
-            transform: translateX(0);
-            transition: transform 600ms ease-out;
-        }
-        &--hide {
-            transform: translateX(-150%);
-            transition: transform 600ms ease-in;
-        }
-    }
-    &-btn {
-        display: flex;
-        white-space: nowrap;
-        font-size: 15px;
-        border: solid white 2px;
-        border-radius: 5px;
-        & img {
-            height: 15px;
-            margin-left: 10px;
-            opacity: 0.3;
-        }
-        &.active {
-            background: rgb(110, 110, 110);
-            & img {
-                opacity: 1;
-            }
+        &__option {
+            min-width: 150px;
         }
     }
 }

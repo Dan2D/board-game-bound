@@ -34,8 +34,8 @@ function Home(props) {
             <div className="hero-container">
                 <Hero />
             </div>
-            <h4>CATEGORIES</h4>
-            <div className="category-container">
+            <h4 className="category__title">CATEGORIES</h4>
+            <div className="category-container--btns">
                     {categoryBtnArr}
             </div>
             <div>

@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import {sortGames} from "../../../Store/Actions/gamesActions";
-import SortBtn from "./SortBtn";
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -13,32 +12,22 @@ const mapDispatchToProps = dispatch => {
 
 function Sort(props) {
     const {sortGames} = props;
-    const [toggleSort, setToggleSort] = useState(false);
-    function handleSort(sort){
-        let data = sort.dataset;
-        sortGames(data.sort, data.top)
+    function handleSort(e){
+        let sort = e.target.attributes["sort"].value;
+        let top = e.target.attributes["top"].value;
+        sortGames(sort, top)
     }
+    const sortIcon = require("../Images/sort-icon.png");
     return (
-        <div className="sort-filter-container">
-            <button className="search__btn search__btn--sort" aria-label="sort" onClick={() => setToggleSort(!toggleSort)}>
-                <img src={require("../Images/sort-icon.png")} alt="sort icon"/>
-            </button>
-            <div className={`sort-container sort-container${toggleSort ? "--show" : "--hide"}`}>
-                <button className="sort-container__btn--close" aria-label="Close" onClick={() => setToggleSort(false)}>X</button>
-                <SortBtn title="Latest" sort="year_published" top="high" onClick={sort => handleSort(sort)}/>
-                <div className="sort-container__group">
-                    <SortBtn title="High to Low Rating" sort="average_user_rating" top="high" onClick={sort => handleSort(sort)}/>
-                    <SortBtn title="Low to High Rating" sort="average_user_rating" top="low" onClick={sort => handleSort(sort)}/>
-                </div>
-                <div className="sort-container__group">
-                    <SortBtn title="High to Low Prices" sort="price" top="high" onClick={(sort) => handleSort(sort)}/>
-                    <SortBtn title="Low to High Prices" sort="price" top="low" onClick={(sort) => handleSort(sort)}/>
-                </div>
-                <div className="sort-container__group">
-                    <SortBtn title="A - Z" sort="name" top="high" onClick={(sort) => handleSort(sort)}/>
-                    <SortBtn title="Z - A" sort="name" top="low" onClick={(sort) => handleSort(sort)}/>
-                </div>
-            </div>
+        <div className="sort-container">
+           <select className="sort-container__select" style={{backgroundImage: 'url('+ sortIcon + ')'}}>
+               <option className="sort-container__option" value="Relavence" sort="none" top="none" onClick={(e) => handleSort(e)}>Relavence</option>
+               <option className="sort-container__option" value="Latest" sort="year_published" top="high" onClick={(e) => handleSort(e)}>Latest</option>
+               <option className="sort-container__option"  value="Rating" sort="average_user_rating" top="high" onClick={(e) => handleSort(e)}>Rating</option>
+               <option className="sort-container__option"  value="Lowest Price" sort="price" top="low" onClick={(e) => handleSort(e)}>Lowest Price</option>
+               <option className="sort-container__option"  value="A-Z" sort="name" top="high" onClick={(e) => handleSort(e)}>A - Z</option>
+               <option className="sort-container__option" value="Z-A" sort="name" top="low" onClick={(e) => handleSort(e)}>Z - A</option>
+           </select>
         </div>
     )
 }

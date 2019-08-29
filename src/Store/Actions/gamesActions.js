@@ -178,6 +178,7 @@ export const filterGames = (filterObj, filterName, checkVal) => dispatch => {
 }
 
 export const sortGames = (sort, top) => dispatch => {
+    console.log(sort, top)
     dispatch({
         type: SORT_GAMES,
         sort,

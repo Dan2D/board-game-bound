@@ -18,9 +18,7 @@ function Searchbar(props) {
 
     return (
         <div className="searchbar-container">
-            <Link to={`/list/search/*`}>
-                <img className="searchbar__icon" src={require("./Images/search-icon.png")} alt="magnifying glass search icon"/>
-            </Link>
+            <img className="searchbar__icon" src={require("./Images/search-icon.png")} alt="magnifying glass search icon"/>
             <input 
             className="searchbar__input" 
             type="text" placeholder="Search..." 
@@ -31,7 +29,7 @@ function Searchbar(props) {
             <Link  
             id="search-lnk"
             className="searchbar__lnk" 
-            to={`/list/search/${searchVal}`} 
+            to={{pathname: `/list/search/${searchVal}`, state: {title: searchVal}}} 
             onClick={(e) => {if (searchVal === ""){return e.preventDefault()}}}>
                 Search
             </Link>

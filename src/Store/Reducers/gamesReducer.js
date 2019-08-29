@@ -79,21 +79,24 @@ const gamesReducer = (state = {}, action) =>{
                 }
             }
         case SORT_GAMES:
-
-            let sortedList = state.searchGames.modList.sort((a,b) => {
-                if (action.top === "high"){
-                    if (action.sort === "name") {
-                        return a[action.sort] > b[action.sort];
+            let sortedList = [...state.searchGames.modList];
+            if (action.sort !== "none") {
+                sortedList = sortedList.sort((a,b) => {
+                    if (action.top === "high"){
+                        if (action.sort === "name") {
+                            return a[action.sort] > b[action.sort];
+                        }
+                        return parseFloat(a[action.sort]) < parseFloat(b[action.sort]);
                     }
-                    return parseFloat(a[action.sort]) < parseFloat(b[action.sort]);
-                }
-                else {
-                    if (action.sort === "name") {
-                        return a[action.sort] < b[action.sort];
+                    else {
+                        if (action.sort === "name") {
+                            return a[action.sort] < b[action.sort];
+                        }
+                        return parseFloat(a[action.sort]) > parseFloat(b[action.sort]);
                     }
-                    return parseFloat(a[action.sort]) > parseFloat(b[action.sort]);
-                }
-            })
+                });
+            }
+            else {sortedList = [...state.searchGames.list]}
 
             return {
                 ...state,

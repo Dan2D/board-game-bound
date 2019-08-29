@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import Sort from "../../Search/Sort/Sort";
 import GameList from "./GameList";
 import InfoList from "./InfoList";
 import Pagination from "../Pagination";
@@ -66,8 +67,9 @@ function List(props) {
     return (
         <div className={`list-${props.list}-container`}>
             <Link className={`list-${props.list}__lnk list-${props.list}__lnk--title`} to={{pathname: `/list/category/${props.title.toLowerCase()}`, state: {title: props.title.toUpperCase()}}}>
-                <h3 className={`list-${props.list}__title`}>{props.title === "*" ? "SEARCH" : props.title}</h3>
+                <h3 className={`list-${props.list}__title`}>{props.title.toUpperCase()}</h3>
             </Link>
+            {props.list === "full" && <Sort/>}
             <ul className={`list-${props.list}__list`}>
                 {gameList}
             </ul>
