@@ -32,12 +32,12 @@ function Filter(props) {
         }
     }
     return (
-        <div className="sort-filter-container">
+        <div className="filter-container">
                 <button className="search__btn search__btn--filter" aria-label="filter" onClick={() => setToggleFilter(!toggleFilter)}>
                     <img src={require("../Images/filter-icon.png")} alt="filter icon"/>
                 </button>
-            <div className={`filter-container filter-container${toggleFilter ? "--show" : "--hide"}`}>
-                <button className="filter-container__btn--close" aria-label="Close" onClick={() => setToggleFilter(false)}>
+            <div className={`filter-container-modal filter-container-modal${toggleFilter ? "--show" : "--hide"}`}>
+                <button className="filter-container-modal__btn--close" aria-label="Close" onClick={() => setToggleFilter(false)}>
                     X
                 </button>
                 <FilterList title="Players" filter="players" onChange={(e, checked) => handleFilters(e, checked)}/>

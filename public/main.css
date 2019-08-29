@@ -722,79 +722,6 @@ a {
   height: 30px;
 }
 
-.sort-filter-container {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-
-.sort-filter, .filter-container {
-  position: fixed;
-  padding: 10px;
-  z-index: 1;
-  background: black;
-}
-
-.filter-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -ms-flex-flow: wrap;
-      flex-flow: wrap;
-  width: 285px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-
-.filter-container--show {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  -webkit-transition: -webkit-transform 700ms ease-out;
-  transition: -webkit-transform 700ms ease-out;
-  transition: transform 700ms ease-out;
-  transition: transform 700ms ease-out, -webkit-transform 700ms ease-out;
-}
-
-.filter-container--hide {
-  -webkit-transform: translateX(150%);
-          transform: translateX(150%);
-  -webkit-transition: -webkit-transform 700ms ease-in;
-  transition: -webkit-transform 700ms ease-in;
-  transition: transform 700ms ease-in;
-  transition: transform 700ms ease-in, -webkit-transform 700ms ease-in;
-}
-
-.filter-list {
-  margin: 0 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
 p, a {
   font-size: 15px;
 }
@@ -956,11 +883,13 @@ button {
   height: 20px;
 }
 
-.search__btn--filter, .search__btn--sort {
+.search__btn--filter {
+  position: absolute;
+  right: 5px;
   background: rgba(0, 0, 0, 0.6);
 }
 
-.btn--close, .filter-container__btn--close {
+.btn--close, .filter-container-modal__btn--close {
   position: absolute;
   right: 0;
   top: 0;
@@ -1066,6 +995,81 @@ button {
 
 .control-dots {
   bottom: 25px;
+}
+
+.filter-container {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.filter-container {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+.filter-container-modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  width: 285px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+  background: black;
+  border-radius: 10px;
+}
+
+.filter-container-modal--show {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: -webkit-transform 700ms ease-out;
+  transition: -webkit-transform 700ms ease-out;
+  transition: transform 700ms ease-out;
+  transition: transform 700ms ease-out, -webkit-transform 700ms ease-out;
+}
+
+.filter-container-modal--hide {
+  -webkit-transform: translateX(150%);
+          transform: translateX(150%);
+  -webkit-transition: -webkit-transform 700ms ease-in;
+  transition: -webkit-transform 700ms ease-in;
+  transition: transform 700ms ease-in;
+  transition: transform 700ms ease-in, -webkit-transform 700ms ease-in;
+}
+
+.filter-list {
+  margin: 0 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .sort-container {

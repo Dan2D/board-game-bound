@@ -23,8 +23,9 @@ button {
     & img {
         height: 20px;
     }
-    &--filter,
-    &--sort {
+    &--filter{
+        position: absolute;
+        right: 5px;
         background: rgba(0,0,0,0.6);
     }
 }

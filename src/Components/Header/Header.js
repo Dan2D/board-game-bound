@@ -28,7 +28,7 @@ function Header(props) {
             </div>
             {props.content === "search" &&
             <div className="header-bottom" style={{}}>
-                    <Filter /> 
+                    {/* <Filter />  */}
             </div>
             }
         </div>
