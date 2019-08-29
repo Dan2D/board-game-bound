@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8e4dad155767cfbac83ce596939c9f56",
+    "revision": "c5964eb35ecc279b79ee29f71a956373",
     "url": "/board-game-bound/index.html"
   },
   {
-    "revision": "1ab1b73dc974c86e16b5",
+    "revision": "bad37536d63fb9b8b505",
     "url": "/board-game-bound/static/css/2.3c1ddb0a.chunk.css"
   },
   {
-    "revision": "1ab1b73dc974c86e16b5",
-    "url": "/board-game-bound/static/js/2.f5397a6c.chunk.js"
+    "revision": "bad37536d63fb9b8b505",
+    "url": "/board-game-bound/static/js/2.33366b2f.chunk.js"
   },
   {
-    "revision": "a7fe3e8346e612d4786b",
-    "url": "/board-game-bound/static/js/main.2839336d.chunk.js"
+    "revision": "c10ce2bb260c6d25e918",
+    "url": "/board-game-bound/static/js/main.22d8f2a9.chunk.js"
   },
   {
     "revision": "f2203cb1edaf0c526164",
@@ -22,6 +22,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1e49d7a15f1f18719748d6fa2778364a",
     "url": "/board-game-bound/static/media/bg-overlay.1e49d7a1.png"
+  },
+  {
+    "revision": "340147ed1a09457079fb8a5591149f40",
+    "url": "/board-game-bound/static/media/loading-icon.340147ed.png"
   },
   {
     "revision": "340147ed1a09457079fb8a5591149f40",
