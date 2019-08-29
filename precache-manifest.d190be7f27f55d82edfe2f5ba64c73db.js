@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "49c84958a0cb60935de8e54ccd0d1f77",
+    "revision": "14c3254c9b05fde65243f59171d7bffd",
     "url": "/board-game-bound/index.html"
   },
   {
