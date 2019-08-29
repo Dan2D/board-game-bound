@@ -1,3 +1,11 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+.hero-container {
+    margin-top: $headerHt;
+}
+
+.category-container {
+    @include flex(row, space-evenly);
+    flex-wrap: wrap;
+}

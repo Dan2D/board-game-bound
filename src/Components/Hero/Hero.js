@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => {
 }
 const mapStateToProps = (state) => {
     return {
+        content: state.games.content,
         loading: state.games.newGames.loading
     }
 }
@@ -28,11 +29,7 @@ function Hero(props) {
     }, [getNewGames]);
 
     if (props.loading){return <div>Loading...</div>}
-    return (
-        <div>
-            <Carousel />
-        </div>
-    )
+    return <Carousel />
 }    
 export default connect(mapStateToProps, mapDispatchToProps)(Hero);
 

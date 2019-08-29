@@ -31,15 +31,15 @@ function Filter(props) {
             filterGames(tempFilters.slice(1), data.filter, false);
         }
     }
-    console.log(typeof window.location.pathname)
     return (
-        <div >
         <div className="sort-filter-container">
-                <button className="search__btn search__btn--filter" onClick={() => setToggleFilter(!toggleFilter)}>
-                    Filter<img src={require("../Images/filter-icon.png")} alt="filter icon"/>
+                <button className="search__btn search__btn--filter" aria-label="filter" onClick={() => setToggleFilter(!toggleFilter)}>
+                    <img src={require("../Images/filter-icon.png")} alt="filter icon"/>
                 </button>
-            </div>
             <div className={`filter-container filter-container${toggleFilter ? "--show" : "--hide"}`}>
+                <button className="filter-container__btn--close" aria-label="Close" onClick={() => setToggleFilter(false)}>
+                    X
+                </button>
                 <FilterList title="Players" filter="players" onChange={(e, checked) => handleFilters(e, checked)}/>
                 <FilterList title="Play Time" filter="time" onChange={(e, checked) => handleFilters(e, checked)}/>
                 <FilterList title="Age" filter="age" onChange={(e, checked) => handleFilters(e, checked)}/>

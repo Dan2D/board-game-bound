@@ -3,6 +3,7 @@ import {getSummaryGames} from "../../Store/Actions/gamesActions";
 import {connect} from "react-redux";
 import Hero from "../Hero/Hero";
 import List from "../Parts/Lists/List";
+import CategoryBtn from "../Parts/CategoryBtn";
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -19,11 +20,28 @@ function Home(props) {
         getSummaryGames("top");
     }, [getSummaryGames])
 
+    const categoryBtnArr = Object.keys(props.categories).map((category, indx) => {
+                            return (
+                                <CategoryBtn 
+                                key={category + indx} 
+                                btnText={category} 
+                                categoryId={props.categories[category]}
+                                />
+                                )
+                            });
     return (
-        <div className="hero-container">
-            <Hero />
-            <List title="TRENDING GAMES" gameList={props.trendingGames} gameType="trendingGames" list="summary"/>
-            <List title="TOP GAMES" gameList={props.topGames} gameType="topGames" list="summary"/>
+        <div>
+            <div className="hero-container">
+                <Hero />
+            </div>
+            <h4>CATEGORIES</h4>
+            <div className="category-container">
+                    {categoryBtnArr}
+            </div>
+            <div>
+                <List title="TRENDING GAMES" gameList={props.trendingGames} gameType="trendingGames" list="summary"/>
+                <List title="TOP GAMES" gameList={props.topGames} gameType="topGames" list="summary"/>
+            </div>
         </div>
     )
 }
@@ -31,7 +49,8 @@ function Home(props) {
 const mapStateToProps = state => {
     return {
         topGames: state.games.topGames.list,
-        trendingGames: state.games.trendingGames.list
+        trendingGames: state.games.trendingGames.list,
+        categories: state.games.categories.list
     }
 }
 

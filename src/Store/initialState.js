@@ -1,5 +1,6 @@
 export const initialState = {
     games: {
+        content: "home",
         newGames: {
             list: {},
             loading: true

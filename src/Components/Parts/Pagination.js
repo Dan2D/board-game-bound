@@ -12,13 +12,14 @@ const mapDispatchToProps = dispatch => {
 
 function Pagination(props) {
     const {newPage} = props;
-   let numOfPgs = props.results / 15;
+   let numOfPgs = Math.ceil(props.results / 15);
    let pgArr = [];
 
    function handlePgClick(i) {
+       window.scrollTo(0,0);
         newPage(i);
    }
-   for (let i = 1; i < numOfPgs; i++){
+   for (let i = 1; i <= numOfPgs; i++){
     pgArr.push(<button key={`page-${i}`} onClick={() => handlePgClick(i)}>{i}</button>)
    }
 

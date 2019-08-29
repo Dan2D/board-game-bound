@@ -29,6 +29,15 @@ p, a {
     
 }
 
+.list-full {
+    &-container {
+        margin-top: $headerHt;
+    }
+    &__lnk--title {
+        pointer-events: none;
+    }
+}
+
 
 .detail-game-block {
     &--layout {

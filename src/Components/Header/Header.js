@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
 function Header(props) {
     const {getCategories} = props;
     useEffect(() => {
-        // getCategories();
+        getCategories();
     }, [getCategories]);
     return (
         <div className="header-container">
@@ -27,11 +27,21 @@ function Header(props) {
                 <Searchbar/>
             </div>
             <div className="header-bottom" style={{}}>
-                <Sort />
-                <Filter />
+                {props.content === "search" ? 
+                <>
+                    <Sort />
+                    <Filter /> 
+                </> 
+                : null}
             </div>
         </div>
     )
 }
 
-export default connect(null, mapDispatchToProps)(Header)
+const mapStateToProps = state => {
+    return {
+        content: state.games.content
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

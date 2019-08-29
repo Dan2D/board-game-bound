@@ -113,7 +113,8 @@ export const getDetailPrice = (game, id, backupImg, bg, dispatch) => {
             aPrice = aPrice[0] === "$" ? aPrice.substr(1) : 999.99;
             bPrice = bPrice[0] === "$" ? bPrice.substr(1) : 999.99;
             return (parseFloat(aPrice) - parseFloat(bPrice));
-        }).filter(item => item.price_text.toLowerCase() !== "out of stock");
+        })
+        .filter(item => item.price_text.toLowerCase() !== "out of stock");
         dispatch({
             type: SET_DETAIL_GAME,
             payload: game[0],
@@ -124,6 +125,7 @@ export const getDetailPrice = (game, id, backupImg, bg, dispatch) => {
 }
 
 export const getSearchResults = searchTxt => dispatch => {
+    if (searchTxt === "*") {searchTxt = ""}
     axios.get(`https://www.boardgameatlas.com/api/search?name=${searchTxt}&client_id=7pxbmyR661`)
     .then(response => {
         dispatch({
@@ -134,20 +136,23 @@ export const getSearchResults = searchTxt => dispatch => {
 }
 
 export const getCategories = dispatch => {
+    let categoryList = [2, 10, 12, 13, 20, 22, 33, 43, 67, 76, 81, 88, 96, 101];
     axios.get(`https://www.boardgameatlas.com/api/game/categories?pretty=true&client_id=7pxbmyR661`)
     .then(response => {
+        let categories = {};
+        categoryList.forEach((category) => {
+            categories[response.data.categories[category]['name']] = response.data.categories[category]['id'];
+        });
         dispatch({
             type: SET_CATEGORIES,
-            payload: response.data.categories
+            payload: categories
         })
     })
 }
 
-// TODO(WILL GET CATEGORY ID FROM BUTTONS, NO NEED TO SEARCH)
 export const getCategoryResults = category => dispatch => {
     let url;
     if (category.toLowerCase() === "top games"){
-        console.log("test")
         url = `https://www.boardgameatlas.com/api/search?order_by=reddit_week_count&client_id=7pxbmyR661`;
     }
     else if (category.toLowerCase() === "trending games"){
@@ -173,7 +178,6 @@ export const filterGames = (filterObj, filterName, checkVal) => dispatch => {
 }
 
 export const sortGames = (sort, top) => dispatch => {
-    console.log(sort,top)
     dispatch({
         type: SORT_GAMES,
         sort,

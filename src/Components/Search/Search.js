@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux'
 import {getSearchResults, getCategoryResults} from "../../Store/Actions/gamesActions";
 import List from "../Parts/Lists/List";
-import Filter from "./Filter/Filter";
+
 
 
 const mapDispatchToProps = dispatch => {
@@ -15,11 +15,8 @@ const mapDispatchToProps = dispatch => {
         }
     }
 }
-// TODO(ADD PAGINATION, ADD CATEGORY BUTTONS, ADD FUNCTIONALITY FOR SORT AND FILTER)
-// TODO(PASS FILTERED LIST TO LIST COMP, FIX ERRORS)
-function Search(props) {
 
-    
+function Search(props) {
     const {getSearchResults, getCategoryResults} = props;
     useEffect(() => {
         if (props.match.params.searchType === "search"){
@@ -32,9 +29,10 @@ function Search(props) {
         return <div>LOADING...</div>
     }
 
+
     return (
         <div>
-            <List title={props.match.params.text.toUpperCase()}  gameType="searchGames" list="full"/>
+            <List title={props.location.state.title}  gameType="searchGames" list="full"/>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
 function Searchbar(props) {
@@ -18,8 +18,8 @@ function Searchbar(props) {
 
     return (
         <div className="searchbar-container">
-            <Link to={`/list/search/`}>
-                <img className="searchbar__icon" src={require("./Images/search-icon.png")} alt="search icon"/>
+            <Link to={`/list/search/*`}>
+                <img className="searchbar__icon" src={require("./Images/search-icon.png")} alt="magnifying glass search icon"/>
             </Link>
             <input 
             className="searchbar__input" 
@@ -28,7 +28,11 @@ function Searchbar(props) {
             onKeyDown={e => keyCheck(e)} 
             onChange={e => setSearchVal(e.target.value)}
             />
-            <Link  id="search-lnk" className="searchbar__lnk" to={`/list/search/${searchVal}`}>
+            <Link  
+            id="search-lnk"
+            className="searchbar__lnk" 
+            to={`/list/search/${searchVal}`} 
+            onClick={(e) => {if (searchVal === ""){return e.preventDefault()}}}>
                 Search
             </Link>
         </div>

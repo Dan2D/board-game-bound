@@ -7,11 +7,9 @@ import Pagination from "../Pagination";
 
 function List(props) {
     let games = props.gameType === "searchGames" && props.games.modList !== null ? props.games.modList : props.games.list;
-    // let pg = 0;
     if (props.games.loading){
         return <div>LOADING...</div>
     }
-    // TODO(START GAME LIST INDX BASED ON PAGE)
     let gameList=[];
     let indxStart = props.pg === 1 ? 0 : (props.pg - 1) * 15;
     let resultsLng = Object.keys(games).length;
@@ -29,8 +27,7 @@ function List(props) {
     else {
         pgLimit = SUMMARY_INDX_LIMIT;
     }
-        for (let i = indxStart; i < indxStart + pgLimit; i++){
-            console.log(Object.keys(games).length);
+        for (let i = indxStart; (i < indxStart + pgLimit && i < resultsLng); i++){
             if (Object.keys(games).length < 1){
                 return <div>No Games Found</div>
             }
@@ -66,61 +63,16 @@ function List(props) {
             </Link>
         </li>)
 }
-
-
-
-
-
-
-
-
-    //     const gameList = games.map((game, indx) => {
-    //     if ((props.list === "summary" && indx > 4) || indx > 15){
-    //         return null;
-    //     }
-    //     let rating = game.average_user_rating;
-    //     if (!game.average_user_rating){
-    //         rating = 0;
-    //     }
-    //     return (
-    //     <li key={game.name} className="list-item">
-    //         <Link className="list-item__lnk" to={`/game/${game.name}/0`}>
-    //         <GameList 
-    //         gameType={props.gameType}
-    //         src={game.images.small}
-    //         discount={game.discount}
-    //         name={game.name}
-    //         rank={indx}
-    //         />
-    //         <InfoList 
-    //         name={game.name}
-    //         id={game.id}
-    //         year={game.year_published}
-    //         publisher={game.primary_publisher}
-    //         minPlayers={game.min_players}
-    //         maxPlayers={game.max_players}
-    //         minTime={game.min_playtime}
-    //         maxTime={game.max_playtime}
-    //         minAge={game.min_age}
-    //         price={game.price}
-    //         msrp={game.msrp}
-    //         discount={game.discount}
-    //         rating={rating}
-    //         />
-    //         </Link>
-    //     </li>)
-    // });
-
     return (
         <div className={`list-${props.list}-container`}>
-            <Link className={`list-${props.list}__lnk list-${props.list}__lnk--title`} to={`/list/category/${props.title.toLowerCase()}`}>
-                <h3 className={`list-${props.list}__title`}>{props.title}</h3>
+            <Link className={`list-${props.list}__lnk list-${props.list}__lnk--title`} to={{pathname: `/list/category/${props.title.toLowerCase()}`, state: {title: props.title.toUpperCase()}}}>
+                <h3 className={`list-${props.list}__title`}>{props.title === "*" ? "SEARCH" : props.title}</h3>
             </Link>
             <ul className={`list-${props.list}__list`}>
                 {gameList}
             </ul>
             {props.list === "full" ? <Pagination results={Object.keys(props.games.modList).length}/> :
-            <Link className={`list-${props.list}__lnk`} to={`/list/category/${props.title.toLowerCase()}`}>
+            <Link className={`list-${props.list}__lnk`} to={{ pathname: `/list/category/${props.title.toLowerCase()}`, state: {title: props.title.toUpperCase()}}}>
                 More Games...
             </Link> }
         </div>

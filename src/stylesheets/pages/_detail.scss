@@ -1,5 +1,6 @@
 .detail-game-block {
     position: relative;
+    margin-top: $headerHt;
     &__bg {
         position:absolute;
         background: rgb(19, 19, 19);

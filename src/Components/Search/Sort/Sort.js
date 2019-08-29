@@ -20,10 +20,11 @@ function Sort(props) {
     }
     return (
         <div className="sort-filter-container">
-            <button className="search__btn search__btn--sort" onClick={() => setToggleSort(!toggleSort)}>
-                Sort<img src={require("../Images/sort-icon.png")} alt="sort icon"/>
+            <button className="search__btn search__btn--sort" aria-label="sort" onClick={() => setToggleSort(!toggleSort)}>
+                <img src={require("../Images/sort-icon.png")} alt="sort icon"/>
             </button>
             <div className={`sort-container sort-container${toggleSort ? "--show" : "--hide"}`}>
+                <button className="sort-container__btn--close" aria-label="Close" onClick={() => setToggleSort(false)}>X</button>
                 <SortBtn title="Latest" sort="year_published" top="high" onClick={sort => handleSort(sort)}/>
                 <div className="sort-container__group">
                     <SortBtn title="High to Low Rating" sort="average_user_rating" top="high" onClick={sort => handleSort(sort)}/>

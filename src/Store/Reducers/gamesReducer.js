@@ -33,6 +33,7 @@ const gamesReducer = (state = {}, action) =>{
             else {gameType = "dealGames"}
             return {
                 ...state,
+                content: "home",
                 [gameType]: {
                 list: action.payload,
                 loading: false
@@ -41,6 +42,7 @@ const gamesReducer = (state = {}, action) =>{
         case SET_DETAIL_GAME:
             return {
                 ...state,
+                content: "detail",
                 detailGame: {
                     ...state.detailGame,
                     game: action.payload,
@@ -60,6 +62,7 @@ const gamesReducer = (state = {}, action) =>{
         case SET_SEARCH_GAMES:
             return {
                 ...state,
+                content: "search",
                 searchGames: {
                     ...state.searchGames,
                     list: action.payload,
@@ -68,14 +71,10 @@ const gamesReducer = (state = {}, action) =>{
                 }
             }
         case SET_CATEGORIES:
-            let catList = {};
-            action.payload.forEach(category => {
-              return  catList[category.name] = category.id;
-            })
             return {
                 ...state,
                 categories: {
-                    list: catList,
+                    list: action.payload,
                     loading: false
                 }
             }
@@ -116,7 +115,7 @@ const gamesReducer = (state = {}, action) =>{
                 }
             }
             if (action.checkVal){
-                filteredList = !state.searchGames.filter ? state.searchGames.list : state.searchGames.filteredList
+                filteredList = !state.searchGames.filter ? state.searchGames.list : state.searchGames.modList
                 if (action.payload[0].name.includes("-")){
                     filteredList = filteredList.filter(game => {return game[action.payload[0].minName] >= action.payload[0].min && game[action.payload[0].maxName] <= action.payload[0].max});
                 }
