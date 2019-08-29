@@ -38,7 +38,7 @@ function List(props) {
         }
         gameList.push(
         <li key={games[i].name} className="list-item">
-            <Link className="list-item__lnk" to={`/game/${games[i].name}/0`}>
+            <Link className="list-item__lnk" to={`/game/${games[i].name.replace(/:|\//, "")}/0`}>
             <GameList 
             gameType={props.gameType}
             src={games[i].images.small}

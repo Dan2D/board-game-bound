@@ -3,3 +3,15 @@
     position: absolute;
     right: 0;
 }
+
+.not-found {
+    @include flex(column, center, center);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    &__img {
+        width: 80%;
+        max-width: 512px;
+    }
+}

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux'
 import {getSearchResults, getCategoryResults} from "../../Store/Actions/gamesActions";
 import List from "../Parts/Lists/List";
+import NotFound from "./NotFound";
 
 
 
@@ -29,6 +30,10 @@ function Search(props) {
         return <div>LOADING...</div>
     }
 
+    if (props.searchGames.length < 1) {
+        return <NotFound />
+    }
+
 
     return (
         <div>
@@ -39,7 +44,8 @@ function Search(props) {
 
 const mapStateToProps = state => {
     return {
-        loading: state.games.searchGames.loading
+        loading: state.games.searchGames.loading,
+        searchGames: state.games.searchGames.list
     }
 }
 

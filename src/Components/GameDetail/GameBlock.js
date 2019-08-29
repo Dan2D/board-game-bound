@@ -8,10 +8,12 @@ import MakerBlock from "./MakerBlock";
 
 
 function GameBlock(props) {
+    let price = props.buyLnks.length < 1 ? "$0.00" : props.buyLnks[0].price_text;
+    let rating = props.game.num_user_ratings < 1 ? 0 : props.game.average_user_rating;
     return (
         <div className="detail-game-block">
             <img className="detail-game-block__bg" style={{backgroundImage: `url("${props.bg}")`}} src={require("./Images/bg-overlay.png")} alt="board game cover" />
-            <Rating class="detail" rating={props.game.average_user_rating} numReviews={props.game.num_user_ratings}/>
+            <Rating class="detail" rating={rating} numReviews={props.game.num_user_ratings}/>
             <div className="detail-game-block--layout">
                 <div className="detail-game-block__title-container">
                     <h3 className="detail-game-block__title">{props.game.name.toUpperCase()}</h3>
@@ -25,7 +27,7 @@ function GameBlock(props) {
                         <Icon type="detail" path="./Images/age-icon.png" name="age" min={props.game.min_age}/>
                     </div>
                 </div>
-                <Price class="detail" price={props.buyLnks[0].price_text} msrp={props.game.msrp} discount={props.game.discount} buyLnks={props.buyLnks}/>
+                <Price class="detail" price={price} msrp={props.game.msrp} discount={props.game.discount} buyLnks={props.buyLnks}/>
                 <Description dscrpt={props.game.description} url={props.game.official_url ? props.game.official_url  : props.game.url} rules={props.game.rules_url}/>
                 <MakerBlock designers={props.game.designers} artists={props.game.artists} publisher={props.game.primary_publisher}/>
             </div>

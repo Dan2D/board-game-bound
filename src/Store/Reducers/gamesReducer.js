@@ -40,12 +40,14 @@ const gamesReducer = (state = {}, action) =>{
                 }
             }
         case SET_DETAIL_GAME:
+            let img = state.detailGame.image ? state.detailGame.image : action.backupImg;
             return {
                 ...state,
                 content: "detail",
                 detailGame: {
                     ...state.detailGame,
                     game: action.payload,
+                    image: img,
                     bg: action.bg,
                     purchaseInfo: action.purchaseInfo,
                     loading: false

@@ -63,6 +63,7 @@ export const getNewGames = dispatch => {
 export const getdetailGameImg = (name, gameId = "0") => dispatch => {
     if (gameId !== "0"){
         return (
+
             fetchXML(`https://www.boardgamegeek.com/xmlapi2/thing?type=boardgame&id=${gameId}`)
             .then(response => {
                 let img = response.querySelectorAll('items item image')[0].innerHTML;
@@ -88,6 +89,7 @@ export const getdetailGameImg = (name, gameId = "0") => dispatch => {
 }
 
 export const getGameDetail = name => dispatch => {
+    name = modifyName(name);
     axios.get(`https://www.boardgameatlas.com/api/search?name=${name}&limit=1&client_id=7pxbmyR661`)
     .then (response => {
         let id = response.data.games[0].id;
@@ -118,6 +120,7 @@ export const getDetailPrice = (game, id, backupImg, bg, dispatch) => {
         dispatch({
             type: SET_DETAIL_GAME,
             payload: game[0],
+            backupImg,
             bg,
             purchaseInfo
         })
@@ -178,7 +181,6 @@ export const filterGames = (filterObj, filterName, checkVal) => dispatch => {
 }
 
 export const sortGames = (sort, top) => dispatch => {
-    console.log(sort, top)
     dispatch({
         type: SORT_GAMES,
         sort,
@@ -251,7 +253,7 @@ export const getGameIds = (url, num) => {
 }
 
 export const modifyName = name => {
-    return name.replace(/(\s)?[\d](st|nd|rd|th)?(.*)/gi, "");
+    return name.replace(/s[\d](st|nd|rd|th)?\sedition|\s\(.*\)/gi, "");
 }
 
 
