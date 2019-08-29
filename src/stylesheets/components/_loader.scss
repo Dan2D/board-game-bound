@@ -1,0 +1,58 @@
+.loader-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    z-index: 5;
+    min-height: 100vh;
+    min-width: 100vw;
+    top: 0;
+    right: 0;
+    opacity: 1;
+    // background: rgba(0,0,0,0.9);
+}
+
+.loading-icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.loading-icon {
+    width: 300px;
+    &--fixed {
+        position: absolute;
+        bottom: 80px;
+        left: 65px;
+        animation: game 8s ease-in-out infinite;
+    }
+
+}
+
+@keyframes game {
+
+    12% {
+        transform: translateX(35px) translateY(-65px);
+    }
+    24% {
+        transform: translateX(-5px) translateY(-130px);
+    }
+    36% {
+        transform: translateX(70px) translateY(-130px);
+    }
+    49% {
+        transform: translateX(140px) translateY(-130px);
+    }
+    61% {
+        transform: translateX(105px) translateY(-65px);
+    }
+    74% {
+        transform: translateX(135px) translateY(-5px);
+    }
+    86% {
+        transform: translateX(70px) translateY(-5px);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+
+}

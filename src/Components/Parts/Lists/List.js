@@ -10,7 +10,7 @@ import Pagination from "../Pagination";
 function List(props) {
     let games = props.gameType === "searchGames" && props.games.modList !== null ? props.games.modList : props.games.list;
     if (props.games.loading){
-        return <div>LOADING...</div>
+        return <div></div>
     }
     let gameList=[];
     let indxStart = props.pg === 1 ? 0 : (props.pg - 1) * 15;

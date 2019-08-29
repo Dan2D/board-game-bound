@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {getGameDetail, getdetailGameImg} from "../../Store/Actions/gamesActions";
 import { connect } from 'react-redux'
 import GameBlock from "./GameBlock"
-import Rating from "../Parts/Rating";
+import Loader from "../Parts/Loader";
 
 const mapDispatchToProps = dispatch =>{
     return {
@@ -23,10 +23,12 @@ function GameDetail(props) {
         getGameDetail(props.match.params.gameName, id);
         getdetailGameImg(props.match.params.gameName, id);
     }, [getGameDetail, props.match.params, getdetailGameImg]);
-    if (props.detailGame.loading){
-        return <div>Loading...</div>;
-    }
-    return  <GameBlock />;
+
+    return (<div>
+                <Loader loading="detailGame" page="detail" />
+                {!props.detailGame.loading && <GameBlock />}
+            </div>
+    )
 }
 const mapStateToProps = state => {
     return {

@@ -28,8 +28,7 @@ function Hero(props) {
         getNewGames();
     }, [getNewGames]);
 
-    if (props.loading){return <div>Loading...</div>}
-    return <Carousel />
+    return (!props.loading && <Carousel />)
 }    
 export default connect(mapStateToProps, mapDispatchToProps)(Hero);
 

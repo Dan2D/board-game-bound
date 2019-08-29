@@ -15,6 +15,7 @@ const gamesReducer = (state = {}, action) =>{
         case GET_NEW_GAMES:
             return {
                 ...state,
+                content: "home",
                 newGames: {
                     list: action.payload,
                     loading: false
@@ -175,8 +176,16 @@ const gamesReducer = (state = {}, action) =>{
         case GAMES_LOADING:
             return {
                 ...state,
-                [action.name]: {
-                    ...state,
+                newGames: {
+                    ...state.newGames,
+                    loading: action.payload
+                },
+                searchGames: {
+                    ...state.searchGames,
+                    loading: action.payload
+                },
+                detailGames: {
+                    ...state.detailGames,
                     loading: action.payload
                 }
             }
