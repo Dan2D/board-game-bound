@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ef04916637ba8e20bd5180a7cb75f47f",
+    "revision": "49c84958a0cb60935de8e54ccd0d1f77",
     "url": "/board-game-bound/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/board-game-bound/static/js/2.33366b2f.chunk.js"
   },
   {
-    "revision": "c10ce2bb260c6d25e918",
-    "url": "/board-game-bound/static/js/main.22d8f2a9.chunk.js"
+    "revision": "15cfb06559befd9e31e7",
+    "url": "/board-game-bound/static/js/main.530bc6ac.chunk.js"
   },
   {
     "revision": "f2203cb1edaf0c526164",
